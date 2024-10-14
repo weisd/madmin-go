@@ -79,9 +79,16 @@ const (
 	libraryName    = "madmin-go"
 	libraryVersion = "3.0.70"
 
-	libraryAdminURLPrefix = "/minio/admin"
-	libraryKMSURLPrefix   = "/minio/kms"
+	libraryKMSURLPrefix = "/minio/kms"
 )
+
+var libraryAdminURLPrefix = "/minio/admin"
+
+func init() {
+	if prefix, has := os.LookupEnv("MC_ADMIN_URL_PREFIX"); has {
+		libraryAdminURLPrefix = prefix
+	}
+}
 
 // User Agent should always following the below style.
 // Please open an issue to discuss any new changes here.
